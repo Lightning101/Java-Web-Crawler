@@ -81,10 +81,9 @@ public class MainAppController implements Initializable ,PageGui{
       for(int i = 0; i<el.size(); i++)
       {
           masterData.add(new WebElement(el.get(i),el.get(i).text()));
-          System.out.println(el.get(i).text() + "herer");
+          
       }
       
-      System.out.println("dsae");
       ItemView.setCellValueFactory(new PropertyValueFactory<WebElement,String>("data"));
        tableView.setItems(masterData);
          
