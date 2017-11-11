@@ -7,7 +7,6 @@ package webcheck;
  */
 
 
-import webcheck.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -90,10 +89,18 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
         
         if(nodeNo>0)
         {
+            try{
             Elements temp = page.select(selector);
             elements = new Elements();
             for(Element e : temp)
                 elements.add(e.child(nodeNo));
+            }catch(IndexOutOfBoundsException ex)
+            {
+                
+            }finally
+            {
+                elements = page.select(selector);
+            }
         }else
            elements = page.select(selector);
     

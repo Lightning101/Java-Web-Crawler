@@ -20,7 +20,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -55,14 +54,7 @@ public class MainAppController implements Initializable ,PageGui{
         {
             @Override
             public void handle(MouseEvent event) {
-               for(PageRequester p : obserList)
-               {
-                   p.setUrl(urlView.getText());
-                   p.setSelector(selectorView.getText());
-                   p.setNodeNo(Integer.parseInt(nodeNoView.getText()));
-                   p.runRequest();
-               }
-                
+               runPrecdure();
             }
             
         });
@@ -102,4 +94,31 @@ public class MainAppController implements Initializable ,PageGui{
         obserList.remove(p);
     }
     
+    
+    public void setUrl(String url)
+    {
+        this.urlView.setText(url);
+    }
+    
+    public void setSelector(String selector)
+    {
+        this.selectorView.setText(selector);
+    }
+    
+    public void setNodeNo(int nodeNo)
+    {
+        this.nodeNoView.setText(String.valueOf(nodeNo));
+    }
+    
+    
+    public void runPrecdure()
+    {
+        for(PageRequester p : obserList)
+               {
+                   p.setUrl(urlView.getText());
+                   p.setSelector(selectorView.getText());
+                   p.setNodeNo(Integer.parseInt(nodeNoView.getText()));
+                   p.runRequest();
+               }
+    }
 }

@@ -4,18 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/ListnerGui.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/test/RequestNetwork.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/test/ImplRequestNetwork.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/MainApp.fxml</file>
+            <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/WebElement.java</file>
+            <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/MainAppController.java</file>
             <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/WebCheck.java</file>
             <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/PageGui.java</file>
             <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/PageRequesterImpl.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/PageRequester.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/test/ListnerGui.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/MainAppController.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/test/main.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/src/webcheck/WebElement.java</file>
-            <file>file:/home/sean/NetBeansProjects/WebCheck/test/PageRequesterImpl.java</file>
         </group>
     </open-files>
 </project-private>

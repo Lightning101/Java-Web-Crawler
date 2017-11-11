@@ -5,26 +5,11 @@
  */
 package webcheck;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.hibernate.annotations.Loader;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 /**
  *
  * @author sean
@@ -37,7 +22,11 @@ public class WebCheck extends Application{
 
     private Stage primaryStage;
     private AnchorPane rootLayout;
-   
+    private static String arg1;
+    private static String arg2;
+    private static String arg3;
+    private static boolean argSet;
+    
 
     @Override
     public void start(Stage primaryStage) {
@@ -59,11 +48,20 @@ public class WebCheck extends Application{
             rootLayout = (AnchorPane) loader.load();
             MainAppController control = (MainAppController) loader.getController();
             control.addObserable(new PageRequesterImpl());
+             
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            if(argSet ==true)
+             {
+                 control.setUrl(arg1);
+                 control.setSelector(arg2);
+                 control.setNodeNo(Integer.parseInt(arg3));
+                 control.runPrecdure();
+             }
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,6 +89,13 @@ public class WebCheck extends Application{
     
     public static void main(String[] args) {
         // TODO code application logic here
+        if(args.length == 3)
+        {
+            arg1 = args[0];
+            arg2 = args[1];
+            arg3 = args[2];
+            argSet = true;
+        }
          launch(args);
          
         
