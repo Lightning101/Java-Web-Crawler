@@ -94,40 +94,6 @@ public class WebCheck extends Application{
          launch(args);
          
         
-        /*URIBuilder uriBuild = new URIBuilder();
-        uriBuild.setScheme("http");
-        uriBuild.setHost("www.bit.lk");
-      
-        CloseableHttpClient httpClient =  HttpClients.createDefault();
-       CloseableHttpResponse reponse;
-        try {
-             HttpGet htppGet = new HttpGet(uriBuild.build());
-          reponse = httpClient.execute(htppGet);
-          
-            /*System.out.println(reponse.toString());
-            System.out.println(EntityUtils.toString(reponse.getEntity()));
-            
-            HttpEntity enty = reponse.getEntity();*/
-          /*  String json  = EntityUtils.toString(reponse.getEntity());
-            Document doc = Jsoup.parse(json);
-            Elements newsHeadlines = doc.select("");
-           
-            for (Element headline : newsHeadlines) {
-                Element s = headline.child(0);
-                System.out.println(s.text());
-            }
-            
-         reponse.close();
-        } catch (IOException ex) {
-            Logger.getLogger(WebCheck.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(WebCheck.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally
-        {
-            
-        }*/
-       
     }
     
 }
