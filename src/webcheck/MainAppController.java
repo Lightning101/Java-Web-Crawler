@@ -180,6 +180,17 @@ public class MainAppController implements Initializable ,PageGui{
               a.show();
               
           }
+          else if(b == 5)
+          {
+              Alert a = new Alert(Alert.AlertType.ERROR);
+              a.setTitle("EXCEPTION");
+              a.setHeaderText("Unkown ERROR");
+              a.setContentText("PLEASE TRY AGAIN");
+              a.getDialogPane().setExpanded(true);
+              a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+              a.show();
+              
+          }
           
     }
 }

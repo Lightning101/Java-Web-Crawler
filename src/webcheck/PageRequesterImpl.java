@@ -9,6 +9,7 @@ package webcheck;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -42,7 +43,8 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
         URL(1),
         CONNECTION(2),
         NODENO(3),
-        FILTER(4);
+        FILTER(4),
+        Unknown(5);
         
         int val;
         error(int i)
@@ -92,8 +94,11 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
         catch (MalformedURLException ex) {
            status |= error.URL.val;
            System.out.println("Please Check Url eg: http://www.google.com");
-        }catch (IOException ex) {
-           
+        }catch (SocketException ex) {
+           status |= error.CONNECTION.val;
+        }catch(Exception ex)
+        {
+            status |= error.Unknown.val;
         } finally
         {
             
