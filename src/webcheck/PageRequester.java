@@ -28,4 +28,5 @@ public interface PageRequester {
     public Elements getElements();
     public Document getPage();
     public void runRequest();
+    public byte getStatus();
 }

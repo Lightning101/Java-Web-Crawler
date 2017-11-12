@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
@@ -20,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import org.jsoup.select.Elements;
 
 /**
@@ -115,10 +117,69 @@ public class MainAppController implements Initializable ,PageGui{
     {
         for(PageRequester p : obserList)
                {
-                   p.setUrl(urlView.getText());
+                  try{ p.setUrl(urlView.getText());
                    p.setSelector(selectorView.getText());
-                   p.setNodeNo(Integer.parseInt(nodeNoView.getText()));
+                   int i = Integer.parseInt(nodeNoView.getText());
+                   if(i<0)
+                       throw new NumberFormatException();
+                   p.setNodeNo(i);
                    p.runRequest();
+                  }catch(NumberFormatException ex)
+                  {
+                      Alert a = new Alert(Alert.AlertType.ERROR);
+                        a.setTitle("EXCEPTION");
+                        a.setHeaderText("NODE NO ERROR");
+                        a.setContentText("NODE NO: SHOULD CONTAIN A INTEGER EQUAL TO 0 OR GREATER");
+                        a.getDialogPane().setExpanded(true);
+                        a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        a.show();
+                  }
                }
+    }
+
+    @Override
+    public void statusReport(PageRequester p) {
+          byte b = p.getStatus();
+          if(b == 1)
+          {
+              Alert a = new Alert(Alert.AlertType.ERROR);
+              a.setTitle("EXCEPTION");
+              a.setHeaderText("URL FORMATE ERROR");
+              a.setContentText("SHOULD BE LIKE: http://www.google.com");
+              a.getDialogPane().setExpanded(true);
+              a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+              a.show();
+          }
+          else if(b == 2)
+          {
+              Alert a = new Alert(Alert.AlertType.ERROR);
+              a.setTitle("EXCEPTION");
+              a.setHeaderText("CONNECTION ERROR");
+              a.setContentText("CONNECTION ISSUE PLEASE RECONNECT AND TRY AGAIN");
+              a.getDialogPane().setExpanded(true);
+              a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+              a.show();
+          }
+          else if(b == 3)
+          {
+              Alert a = new Alert(Alert.AlertType.ERROR);
+              a.setTitle("EXCEPTION");
+              a.setHeaderText("NODE NO ERROR");
+              a.setContentText("NODE VALUE INCORRECT PLEASE REDUCE");
+              a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+              a.getDialogPane().setExpanded(true);
+              a.show();
+          }else if(b == 4)
+          {
+              Alert a = new Alert(Alert.AlertType.ERROR);
+              a.setTitle("EXCEPTION");
+              a.setHeaderText("SELECTOR ERROR");
+              a.setContentText("PLEASE USE CSS SELECTORS FROM https://www.w3schools.com/cssref/css_selectors.asp");
+              a.getDialogPane().setExpanded(true);
+              a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+              a.show();
+              
+          }
+          
     }
 }

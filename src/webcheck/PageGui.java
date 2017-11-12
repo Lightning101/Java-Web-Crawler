@@ -15,5 +15,6 @@ public interface PageGui {
     public void updated(PageRequester p);
     public void addObserable(PageRequester p);
     public void removeObserable(PageRequester p);
+    public void statusReport(PageRequester p);
     
 }

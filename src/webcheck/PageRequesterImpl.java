@@ -21,6 +21,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.jsoup.select.Selector;
 
 /**
  *
@@ -35,6 +36,20 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
     private Elements elements;
     private Document  page;
     private boolean inprogress;
+    public byte status;
+    private enum error
+    {
+        URL(1),
+        CONNECTION(2),
+        NODENO(3),
+        FILTER(4);
+        
+        int val;
+        error(int i)
+        {
+            this.val = i;
+        }
+    }
     
     public PageRequesterImpl(String url, String selector, int nodeNo)
     {
@@ -43,11 +58,13 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
         this.selector = selector;
         this.nodeNo = nodeNo;
         this.inprogress = false;
+        this.status = 0;
         
     }
 
     PageRequesterImpl() {
         listners = new ArrayList<>();
+        this.status = 0;
     }
     
     
@@ -70,8 +87,10 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
         }catch(UnknownHostException uhe)
         {
             System.out.println("Could not find host");
+            status |= error.CONNECTION.val;
         } 
         catch (MalformedURLException ex) {
+           status |= error.URL.val;
            System.out.println("Please Check Url eg: http://www.google.com");
         }catch (IOException ex) {
            
@@ -86,7 +105,7 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
     public void filter(String selector, int nodeNo) {
         if(selector == null)
             selector = this.selector;
-        
+        try{
         if(nodeNo>0)
         {
             try{
@@ -96,20 +115,30 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
                 elements.add(e.child(nodeNo));
             }catch(IndexOutOfBoundsException ex)
             {
-                
+                status |= error.NODENO.val;
             }finally
             {
                 elements = page.select(selector);
             }
         }else
            elements = page.select(selector);
-    
+        }catch(Selector.SelectorParseException ex)
+        {
+            status |= error.FILTER.val;
+        }
     }
 
     @Override
     public void ready() {
+        if(status == 0){
         for(PageGui p : listners)
             p.updated(this);
+        }else
+        {
+        for(PageGui p : listners)
+            p.statusReport(this);
+            
+        }
     }
 
     @Override
@@ -165,6 +194,7 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
     @Override
     public void run() {
         getRequest(this.url);
+        if(status == 0)
         filter(this.selector, this.nodeNo);
         ready();
         this.inprogress =false;
@@ -176,11 +206,17 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
     
         if(!this.inprogress)
         {
+            status = 0;
             this.inprogress = true;
             Thread t = new Thread(this);
             t.run();
         }
     
+    }
+
+    @Override
+    public byte getStatus() {
+        return this.status;
     }
     
     
