@@ -6,17 +6,15 @@ idea:
   
   eg: Fashion site 
   
-
-![Alt text](/screenshots/s1.png "Optional Title")
+<img src="https://raw.githubusercontent.com/Lightning101/Java-Web-Scaper/master/screenshots/s1.png" />
 
 you can find items you want to mointor
-![Alt text](/screenshots/s2.png "Optional Title")
+<img src="https://raw.githubusercontent.com/Lightning101/Java-Web-Scaper/master/screenshots/s2.png" />
 
 then enter in web scrapper
-![Alt text](/screenshots/s3.png "Optional Title")
+<img src="https://raw.githubusercontent.com/Lightning101/Java-Web-Scaper/master/screenshots/s3.png" />
 
-![Alt text](/screenshots/s4.png "Optional Title")
-
+<img src="https://raw.githubusercontent.com/Lightning101/Java-Web-Scaper/master/screenshots/s4.png" />
 
 if there are changes you can take futher action if not disregard effecitly good for deal sites where same query is run to see if changes.
 
