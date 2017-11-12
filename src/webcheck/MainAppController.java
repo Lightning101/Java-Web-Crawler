@@ -56,6 +56,8 @@ public class MainAppController implements Initializable ,PageGui{
         {
             @Override
             public void handle(MouseEvent event) {
+               
+                progressView.setProgress(0.25);
                runPrecdure();
             }
             
@@ -69,7 +71,7 @@ public class MainAppController implements Initializable ,PageGui{
 
     @Override
     public void updated(PageRequester p) {
-    
+        progressView.setProgress(0.75);
       Elements el =   p.getElements();
       masterData.clear();
       for(int i = 0; i<el.size(); i++)
@@ -80,6 +82,7 @@ public class MainAppController implements Initializable ,PageGui{
       
       ItemView.setCellValueFactory(new PropertyValueFactory<WebElement,String>("data"));
        tableView.setItems(masterData);
+       progressView.setProgress(1);
          
              
     }
@@ -186,6 +189,17 @@ public class MainAppController implements Initializable ,PageGui{
               a.setTitle("EXCEPTION");
               a.setHeaderText("Unkown ERROR");
               a.setContentText("PLEASE TRY AGAIN");
+              a.getDialogPane().setExpanded(true);
+              a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+              a.show();
+              
+          }
+          else if(b == 6)
+          {
+              Alert a = new Alert(Alert.AlertType.ERROR);
+              a.setTitle("EXCEPTION");
+              a.setHeaderText("NOT FOUND WITH SELECTOR ERROR");
+              a.setContentText("Current selector does not have any reuslts");
               a.getDialogPane().setExpanded(true);
               a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
               a.show();

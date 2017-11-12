@@ -44,7 +44,8 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
         CONNECTION(2),
         NODENO(3),
         FILTER(4),
-        Unknown(5);
+        Unknown(5),
+        NOTFOUND(6);
         
         int val;
         error(int i)
@@ -127,6 +128,8 @@ public class PageRequesterImpl implements PageRequester ,Runnable{
             }
         }else
            elements = page.select(selector);
+            if(elements.isEmpty())
+                status |= error.NOTFOUND.val;
         }catch(Selector.SelectorParseException ex)
         {
             status |= error.FILTER.val;
